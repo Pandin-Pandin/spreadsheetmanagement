@@ -1,0 +1,173 @@
+:root {
+    --blue-bg: #0763af;
+    --blue-bg-two: #075baf;
+    --blue-bg-three: #004cff;
+    --font-Y: 'Ysabeau SC';
+    --font-SM: 'SpaceMono';
+}
+
+.table-box {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 20px 15px 20px;
+    border-radius: 5px;
+    gap: 10px;
+    background-color: var(--blue-bg-two);
+    color: white;
+}
+
+.user-container {
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    background-color: var(--blue-bg-two);
+}
+
+.user-table {
+    background-color: var(--blue-bg-two);
+    position: relative;
+    height: fit-content;
+    width: 400px;
+    text-align: center;
+    border-top: none;
+    border-bottom: none;
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.title {
+    background-color: var(--blue-bg-three);
+    min-height: 40px;
+    max-height: 40px;
+    width: 412px;
+    font-size: 18px;
+    padding-left: 3px;
+    padding-right: 3px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-table .user {
+    height: 40px;
+    width: 400px;
+    border-bottom: 1px solid white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-table .user:last-child {
+    border: none;
+}
+
+.user .name {
+    margin-left: 20px;
+}
+
+.box-btn {
+    display: flex;
+    height: 100%;
+    justify-items: center;
+    align-items: center;
+}
+
+.user-table .btn {
+    width: 40px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-table a {
+    text-decoration: none;
+}
+
+.edit {
+    color: lightgreen;
+}
+
+.remove {
+    color: white;
+    background-color: red;
+    border-radius: 50%;
+    margin-right: 5px;
+    scale: 0.8;
+}
+
+.remove:active {
+    filter: brightness(1.8);
+    scale: 0.7;
+}
+
+.confirmation-dialog {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    text-align: center;
+}
+
+.confirmation-dialog p {
+    margin-bottom: 10px;
+}
+
+#confirm-delete {
+    background-color: rgb(179, 179, 179);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+#cancel-delete {
+    background-color: #00ffdd;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#confirm-delete:hover {
+    filter: brightness(1.1);
+}
+
+#cancel-delete:hover {
+    background-color: #84ffef;
+}
+
+#confirm-delete:active,
+#cancel-delete:active {
+    scale: 0.9;
+}
+
+.confirmation-dialog.show {
+    display: block;
+}
+
+@media screen and (max-width:910px) {
+    .title {
+        width: 395px;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .title {
+        width: 235px;
+    }
+    
+    .user-table {
+        width: 240px;
+    }
+}

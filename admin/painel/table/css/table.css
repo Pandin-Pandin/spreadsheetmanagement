@@ -1,0 +1,94 @@
+:root {
+    --blue-bg: rgb(52, 128, 255);
+    --blue-bg-two: rgb(52, 82, 255);
+    --font-Y: 'Ysabeau SC';
+    --font-SM: 'SpaceMono';
+}
+
+@font-face {
+    font-family: 'Ysabeau SC';
+    src: url('../../fonts/Ysabeau_SC/YsabeauSC-VariableFont_wght.ttf');
+    src: url('../../fonts/Ysabeau_SC/YsabeauSC-VariableFont_wght.ttf'), format('truetype');
+}
+
+@font-face {
+    font-family: 'SpaceMono';
+    src: url('../../fonts/Space_Mono/SpaceMono-Regular.ttf');
+    src: url('../../fonts//Space_Mono/SpaceMono-Regular.ttf'), format('truetype');
+}
+
+
+.table-box {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 20px 15px 20px;
+    border-radius: 5px;
+    gap: 10px;
+    background-color: var(--blue-bg-two);
+    color: white;
+}
+
+.table-container {
+    max-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    background-color: var(--blue-bg-two);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.title-box {
+    display: flex;
+    justify-content: right;
+}
+
+.buttons {
+    color: white;
+}
+
+.buttons span {
+    cursor: pointer;
+}
+
+.buttons span.rotate {
+    transform: rotate(360deg);
+    transition: transform 600ms;
+}
+
+.buttons span.disable {
+    display: none;
+}
+
+.buttons span:nth-child(2) {
+    display: none;
+}
+
+.buttons span:nth-child(2).show {
+    color: rgb(27, 255, 27);
+    display: inline-block;
+    opacity: 1;
+    transition: opacity 2s;
+}
+
+.title-box .title {
+    color: rgb(255, 255, 255);
+    font-size: 19px;
+    text-align: center;
+    width: 100%;
+}
+
+#tabelas {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+a.link {
+    text-decoration: none;
+    color: white;
+}
+
+a.link:hover {
+    color: rgb(49, 228, 255);
+}

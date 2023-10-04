@@ -1,0 +1,34 @@
+@font-face {
+    font-family: 'Ysabeau SC';
+    src: url('../../fonts/Ysabeau_SC/YsabeauSC-VariableFont_wght.ttf');
+    src: url('../../fonts/Ysabeau_SC/YsabeauSC-VariableFont_wght.ttf'), format('truetype');
+}
+
+@font-face {
+    font-family: 'SpaceMono';
+    src: url('../../fonts/Space_Mono/SpaceMono-Regular.ttf');
+    src: url('../../fonts//Space_Mono/SpaceMono-Regular.ttf'), format('truetype');
+}
+
+:root {
+    --blue-bg: rgb(52, 128, 255);
+    --blue-bg-two: rgb(52, 82, 255);
+    --font-Y: 'Ysabeau SC';
+    --font-SM: 'SpaceMono';
+}
+
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--blue-bg);
+    user-select: none;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}

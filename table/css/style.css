@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    
+    background-color: rgb(255, 255, 255);
+}
+
+.box-fake {
+    width: 100%;
+    height: 40px;
+}
+
+.box-title {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 40px;
+    font-size: 35px;
+    text-align: center;
+}
+
+/* Estilo para a primeira coluna (cabeçalhos de linha) */
+
+.line {
+    position: sticky;
+    left: 2px;
+    color: black;
+    border: 1px solid black;
+    background-color: white;
+    width: 50px;
+}
+
+.line p {
+    width: 70px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.head {
+    width: 200px;
+    border: 1px solid;
+}
+
+td input {
+    margin: 1px;
+    padding-left: 3px;
+    font-size: 16px;
+    width: 100px;
+    height: 32px;
+    user-select: none;
+}
+
+.buttons {
+    position: fixed;
+    left: 3px;
+    padding: 8px;
+}
+
+.buttons input {
+    position: relative;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.error-box {
+    position: fixed;
+    top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#error {
+    position: relative;
+}
+
+.progress-bar {
+    position: absolute;
+    top: 0;
+    width: calc(var(--width, 0) * 1%);
+    height: 5px;
+    min-width: 0%;
+    max-width: 100%;
+}
+
+.progress-bar.success {
+    background-color: green;
+}
+
+.progress-bar.error {
+    background-color: red;
+}
+
+#error p {
+    background-color: rgb(177, 210, 255);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 3px;
+    width: fit-content;
+    font-size: 20px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success {
+    color: rgb(0, 149, 255);
+    text-shadow: 1px 1px white;
+}
+
+.error {
+    color: rgb(255, 67, 67);
+    text-shadow: 1px 1px white;
+}
+
+.editable {
+    display: block;
+}
+
+.no-editable {
+    pointer-events: none;
+}
