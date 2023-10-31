@@ -48,14 +48,16 @@ try {
                 $firstTable = false;
             }
 
-            $unionQuery .= "SELECT id, $hour_str FROM $tableName";
+            $unionQuery .= "SELECT `Parâmetros/Horários`, $hour_str FROM $tableName";
             echo $unionQuery . "\n";
         }
     }
-
-    $sql = "SELECT id, $maxHour_str
+    echo $unionQuery . "\n";
+    var_dump($unionQuery);
+    
+    $sql = "SELECT `Parâmetros/Horários`, $maxHour_str
         FROM ( $unionQuery ) AS merged
-        GROUP BY id";
+        GROUP BY `Parâmetros/Horários`";
 
     $fileName = '/home/' . $date . '.csv';
 
@@ -123,20 +125,28 @@ try {
     if ($file === false) {
         die("Erro ao abrir o arquivo para gravação.");
     }
-
+    
     $columnHeaders = array();
     
-    while ($column = $result->fetch_field()) {
-        $columnHeaders[] = $column->name;
-    }
+    // Certifique-se de que a codificação do arquivo seja UTF-8
+    fwrite($file, "\xEF\xBB\xBF");
     
     fputcsv($file, $columnHeaders, ';');
-
+    
     while ($row = $result->fetch_assoc()) {
+        foreach ($row as $key => $value) {
+            // Remova a conversão para entidades HTML, pois isso pode afetar caracteres especiais
+            // $row[$key] = htmlentities($value);
+    
+            // Certifique-se de que os valores estejam na codificação correta (UTF-8)
+            $row[$key] = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $value);
+        }
+    
         fputcsv($file, $row, ';');
     }
-
+    
     fclose($file);
+
     
     $conn->close();
     $destiny_conn->close();

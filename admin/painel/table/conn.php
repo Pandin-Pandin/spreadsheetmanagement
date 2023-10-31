@@ -3,7 +3,7 @@
     $servername = "localhost";
     $dbUsername = "pandin";
     $dbPassword = "P@nd1n@P";
-    $dbName = "finaltable";
+    $dbName = "tabledb";
 
     try {
         // Tentar criar a conexão com o banco de dados
@@ -17,4 +17,7 @@
     if ($conn->connect_error) {
         die("Conexão falhou: " . $conn->connect_error);
     }
+    
+    $conn->set_charset("utf8");
+    
 ?>

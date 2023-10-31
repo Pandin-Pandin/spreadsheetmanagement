@@ -1,0 +1,322 @@
+:root {
+    --blue-bg: #0763af;
+    --blue-bg-two: #075baf;
+    --blue-bg-three: #004cff;
+    --font-Y: 'Ysabeau SC';
+    --font-SM: 'SpaceMono';
+}
+
+@font-face {
+    font-family: 'Ysabeau SC';
+    src: url('../../fonts/Ysabeau_SC/YsabeauSC-VariableFont_wght.ttf');
+    src: url('../../fonts/Ysabeau_SC/YsabeauSC-VariableFont_wght.ttf'), format('truetype');
+}
+
+@font-face {
+    font-family: 'SpaceMono';
+    src: url('../../fonts/Space_Mono/SpaceMono-Regular.ttf');
+    src: url('../../fonts//Space_Mono/SpaceMono-Regular.ttf'), format('truetype');
+}
+
+.table-box {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 20px 15px 20px;
+    border-radius: 5px;
+    gap: 10px;
+    background-color: var(--blue-bg-two);
+    color: white;
+}
+
+.user-container {
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    background-color: var(--blue-bg-two);
+}
+
+.user-table {
+    background-color: var(--blue-bg-two);
+    position: relative;
+    height: fit-content;
+    width: 400px;
+    text-align: center;
+    border-top: none;
+    border-bottom: none;
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.table-box .title {
+    position: relative;
+    background-color: var(--blue-bg-three);
+    min-height: 40px;
+    max-height: 40px;
+    width: 412px;
+    font-size: 18px;
+    padding-left: 3px;
+    padding-right: 3px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.add {
+    position: absolute;
+    right: 10px;
+    background-color: #44bf0f;
+    border-radius: 50%;
+    padding: 7px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.add:hover {
+    filter: brightness(1.5);
+}
+
+.add:active {
+    scale: 1.1;
+}
+
+.box-login {
+    display: none;
+    position: absolute;
+}
+
+.login-screen {
+    position: relative;
+    width: 280px;
+    height: fit-content;
+    padding: 20px 0 20px 0;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: aliceblue;
+    user-select: none;
+}
+
+.login-screen>.title {
+    font-family: var(--font-Y);
+    color: var(--blue-bg);
+    margin-bottom: 10px;
+    font-size: 38px;
+    font-weight: 800;
+}
+
+.close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-radius: 5px;
+    background-color: rgb(154, 2, 2);
+    color: white;
+    cursor: pointer;
+}
+
+.close:hover {
+    filter: brightness(1.4);
+}
+
+.login-form .name {
+    font-family: var(--font-Y);
+    font-weight: 600;
+    color: var(--blue-bg);
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+.name-box {
+    font-family: var(--font-SM);
+    color: var(--blue-bg);
+    width: 180px;
+    height: 30px;
+    border: none;
+    background-color: rgb(218, 218, 218);
+    border-radius: 5px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.name-box:focus {
+    border: 1px solid var(--blue-bg);
+}
+
+.passwd {
+    font-family: var(--font-Y);
+    font-weight: 600;
+    color: var(--blue-bg);
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+.passwd-box {
+    font-family: var(--font-Y);
+    color: var(--blue-bg);
+    font-size: 15px;
+    width: 180px;
+    height: 30px;
+    border: none;
+    background-color: rgb(218, 218, 218);
+    border-radius: 5px;
+    text-align: center;
+}
+
+.passwd-box:focus {
+    border: 1px solid var(--blue-bg);
+} 
+
+.error {
+    color: red;
+}
+
+.success {
+    color: blue;
+}
+
+.box-submit {
+    margin-top: 10px;
+    margin-right: 2px;
+}
+
+.submit-btn {
+    border: none;
+    padding: 6px 15px 6px 15px;
+    font-size: 24px;
+    background-color: var(--blue-bg);
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    filter: brightness(1.4);
+}
+
+.user-table .user {
+    height: 40px;
+    width: 400px;
+    border-bottom: 1px solid white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-table .user:last-child {
+    border: none;
+}
+
+.user .name {
+    margin-left: 20px;
+}
+
+.box-btn {
+    display: flex;
+    height: 100%;
+    justify-items: center;
+    align-items: center;
+}
+
+.user-table .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-table a {
+    text-decoration: none;
+}
+
+.edit {
+    color: lightgreen;
+}
+
+.remove {
+    color: white;
+    background-color: red;
+    border-radius: 50%;
+    margin-right: 5px;
+    padding: 4px;
+}
+
+.remove:active {
+    filter: brightness(1.8);
+    scale: 1.1;
+}
+
+.confirmation-dialog {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    text-align: center;
+}
+
+.confirmation-dialog p {
+    margin-bottom: 10px;
+}
+
+#confirm-delete {
+    background-color: rgb(179, 179, 179);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+#cancel-delete {
+    background-color: #00ffdd;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#confirm-delete:hover {
+    filter: brightness(1.1);
+}
+
+#cancel-delete:hover {
+    background-color: #84ffef;
+}
+
+#confirm-delete:active,
+#cancel-delete:active {
+    scale: 1.1;
+}
+
+.show {
+    display: block;
+}
+
+@media screen and (max-width:910px) {
+    .title {
+        width: 395px;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .title {
+        width: 235px;
+    }
+    
+    .user-table {
+        width: 240px;
+    }
+}

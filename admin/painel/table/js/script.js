@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     var $firstSpan = $(".buttons span:first");
     var $secondSpan = $(".buttons span:nth-child(2)");
     var $refreshButton = $(".refresh-button");
@@ -29,33 +30,48 @@ $(document).ready(function() {
 
     // Função para atualizar a lista de tabelas
     function atualizarTabelas() {
-        
         $.ajax({
             url: 'merge.php',
             method: 'GET',
-            sucess: function() {
+            success: function() {
                 $.ajax({
-                    url: 'update.php', // Substitua pelo URL correto da sua lógica de atualização
+                    url: 'update.php',
                     method: 'GET',
                     success: function(data) {
+                        console.log("Funcionou o update");
                         // Atualize o conteúdo da div .table-box com os dados atualizados
                         $('#tabelas').html(data);
+                        // Desvincule o evento de clique antes de adicioná-lo novamente
+                        $refreshButton.off('click');
+                        $refreshButton.click(function() {
+                            console.log("Botão clicado");
+                            // Chame a função para atualizar as tabelas
+                            atualizarTabelas();
+                        });
                     },
                     error: function() {
+                        console.log("Erro ao unir tabelas");
                         alert('Erro ao atualizar as tabelas.');
                     }
                 });
-            }, 
+            },
             error: function() {
+                console.log("Erro ao unir tabelas");
                 alert('Erro ao unir tabelas.');
             }
-        })
-        
+        });
     }
 
     // Adicione um manipulador de eventos de clique para o botão de atualização
     $refreshButton.click(function() {
+        console.log("Botão clicado");
         // Chame a função para atualizar as tabelas
         atualizarTabelas();
+    });
+
+    $('.table-container').on('click', '.view-table', function() {
+        var tableName = $(this).data('table');
+        var url = 'view_table.php?table=' + tableName;
+        window.open(url, '_blank');
     });
 });

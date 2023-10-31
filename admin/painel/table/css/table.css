@@ -84,11 +84,18 @@
     gap: 5px;
 }
 
-a.link {
-    text-decoration: none;
-    color: white;
+.links {
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
-a.link:hover {
+a.link, .links>span {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+a.link:hover, .links>span:hover {
     color: rgb(49, 228, 255);
 }
