@@ -17,7 +17,7 @@ The User Panel provides users with the ability to fill out a spreadsheet while a
 The Admin Panel is responsible for user management and spreadsheet download. Key details include:
 
 - Administrators can create and delete user accounts.
-- It is possible to download spreadsheets created by users.
+- It is possible to download and see the spreadsheets created by users.
 
 ## How to Access This Project?
 
