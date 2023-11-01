@@ -1,22 +1,53 @@
 $(document).ready(function () {
 
-    var currentHour = new Date().getHours();
-    console.log(currentHour);
-    
-    var elements = $("td input");
-    var currentClass = "column-[" + currentHour + "]";    
-    console.log(currentClass);
-
-    elements.each(function() {
-       var element = $(this);
-       if (element.hasClass(currentClass)) {
-            element.removeClass("no-editable").addClass("editable");
-            // console.log("A classe \"editable\" foi adicionada com sucesso");
-        } else {
-            element.addClass("no-editable");
-            // console.log("A classe \"no-editable\" foi adicionada com sucesso");
-        }
+    $('.ete').click(function() {
+        var url = 'ete_table.php';
+        window.open(url, '_blank');
     });
+
+    function serverTime() {
+        currentTime = new Date();
+        year = currentTime.getFullYear();
+        month = currentTime.getMonth() + 1;
+        day = currentTime.getDate();
+        hour = currentTime.getHours();
+        minute = currentTime.getMinutes();
+        second = currentTime.getSeconds();
+        time = year + "" + (month < 10 ? "0" : "") + month + "" + (day < 10 ? "0" : "") + day + "" + (hour < 10 ? "0" : "") + hour + "" + (minute < 10 ? "0" : "") + minute;
+    };
+    
+    serverTime();
+    
+    function hourVerify(time, buttonClicked) {
+        
+        var strTime = time.toString();
+        var strButtonClicked = buttonClicked.toString();
+        
+        if (strTime === strButtonClicked) {
+            $("#submitData").removeClass("no-editable").addClass("no-editable");
+        } else {
+            $("#submitData").removeClass("no-editable");
+        };
+    };
+
+    setInterval(function() {
+        hourVerify(time, buttonClicked);
+        
+        serverTime();
+
+        var elements = $("td input");
+        var currentClass = "column-[" + hour + "]";
+        console.log(currentClass);
+        
+        elements.each(function() {
+           var element = $(this);
+           if (element.hasClass(currentClass)) {
+                element.removeClass("no-editable").addClass("editable");
+            } else {
+                element.addClass("no-editable");
+            }
+        });
+    }, 100);
 
     function showError(message) {
         $("#error").html("<p class='error'>" + message + "</p>");
@@ -26,42 +57,9 @@ $(document).ready(function () {
         }, 4000);
     }
 
-    currentTime = new Date();
-    year = currentTime.getFullYear();
-    month = currentTime.getMonth() + 1;
-    day = currentTime.getDate();
-    hour = currentTime.getHours();
-    minute = currentTime.getMinutes();
-    
-    time = year + "" + (month < 10 ? "0" : "") + month + "" + (day < 10 ? "0" : "") + day + "" + (hour < 10 ? "0" : "") + hour + "" + (minute < 10 ? "0" : "") + minute;
-    
-    console.log(time)
     var buttonClicked = localStorage.getItem("time");
     
-    function hourVerify(time, buttonClicked) {
-        
-        var strTime = time.toString();
-        var strButtonClicked = buttonClicked.toString();
-        
-        if (strTime === strButtonClicked) {
-            $("#submitData").addClass("no-editable");
-            console.log("Hora atual do servidor: " + time + " Hora do botão: " + buttonClicked);
-        } else {
-            $("#submitData").removeClass("no-editable");
-            console.log("Classe removida");
-        }  
-    };
-    
-    setInterval(function() {
-        var currentTime = new Date();
-        var currentMinutes = currentTime.getMinutes();
-        var currentSeconds = currentTime.getSeconds();
-
-        if (currentSeconds === 0) {
-
-            hourVerify(currentTime, buttonClicked);
-        }
-    }, 1000);
+    console.log("Hora do carregamento da página: " + time);
     
     console.log("Momento em que o botão foi clicado: ", buttonClicked); 
 
@@ -73,13 +71,9 @@ $(document).ready(function () {
         $("input.editable").each(function() {
             if ($(this).val().trim() === "") {
                 allValuesFilled = false;
-                console.log("Não está preenchido");
                 return false;
-            } else {
-                console.log("Está preenchido");
-                allValuesFilled = true;
             }
-        })
+        });
 
         if (allValuesFilled) {
 
@@ -88,6 +82,8 @@ $(document).ready(function () {
                 url: "script.php", // Update the URL to point to your PHP file
                 data: $("#dataForm").serialize(),
                 success: function (response) {
+                    buttonClicked = time;
+                    localStorage.setItem("time", buttonClicked);
                     // Handle success, show a success message in green
                     $("#error").html(response);
                     setTimeout(function() {
@@ -105,27 +101,22 @@ $(document).ready(function () {
                     }
                 }
             });
-            
-            buttonClicked = time;
-        
-            localStorage.setItem("time", buttonClicked);
-            
-            console.log("Momento em que o botão foi clicado: ", buttonClicked);
-            
+
             $("#submitData").addClass("no-editable");
-            
+
             console.log("Todos os input's da coluna estão preenchidos!");
-            
+
         } else {
-            
+
             $("#error").html("<p class='error'>Algum input da coluna " + 
-                currentHour
+            hour
                 + " atual está vazio</p>");
-            
+
             setTimeout(function() {
                 $("#error").html("");
             }, 4000);
         }
+        console.log("Momento em que o botão foi clicado: ", buttonClicked); 
     });
 
     // Hide error message when clicking anywhere on the screen except the button
@@ -144,7 +135,7 @@ $(document).ready(function () {
         // Reset the form to clear all input fields
         $("#dataForm")[0].reset();
     });
-    
+
     $(window).on("beforeunload", function () {
         return "Tem certeza que deseja sair? Todas as alterações não salvas serão perdidas.";
     });
