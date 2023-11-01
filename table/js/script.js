@@ -1,5 +1,10 @@
 $(document).ready(function () {
 
+    $('.ete').click(function() {
+        var url = 'ete_table.php';
+        window.open(url, '_blank');
+    });
+
     function serverTime() {
         currentTime = new Date();
         year = currentTime.getFullYear();
@@ -10,8 +15,6 @@ $(document).ready(function () {
         second = currentTime.getSeconds();
         time = year + "" + (month < 10 ? "0" : "") + month + "" + (day < 10 ? "0" : "") + day + "" + (hour < 10 ? "0" : "") + hour + "" + (minute < 10 ? "0" : "") + minute;
     };
-
-    var allValuesFilled = true;
     
     serverTime();
     
@@ -26,35 +29,25 @@ $(document).ready(function () {
             $("#submitData").removeClass("no-editable");
         };
     };
-    
+
     setInterval(function() {
         hourVerify(time, buttonClicked);
-        serverTime();
         
-        $("input.editable").each(function() {
-            if ($(this).val().trim() === "") {
-                allValuesFilled = false;
-                return false;
+        serverTime();
+
+        var elements = $("td input");
+        var currentClass = "column-[" + hour + "]";
+        console.log(currentClass);
+        
+        elements.each(function() {
+           var element = $(this);
+           if (element.hasClass(currentClass)) {
+                element.removeClass("no-editable").addClass("editable");
             } else {
-                allValuesFilled = true;
+                element.addClass("no-editable");
             }
         });
     }, 100);
-    
-    var elements = $("td input");
-    var currentClass = "column-[" + hour + "]";
-    console.log(currentClass);
-
-    elements.each(function() {
-       var element = $(this);
-       if (element.hasClass(currentClass)) {
-            element.removeClass("no-editable").addClass("editable");
-            // console.log("A classe \"editable\" foi adicionada com sucesso");
-        } else {
-            element.addClass("no-editable");
-            // console.log("A classe \"no-editable\" foi adicionada com sucesso");
-        }
-    });
 
     function showError(message) {
         $("#error").html("<p class='error'>" + message + "</p>");
@@ -64,7 +57,6 @@ $(document).ready(function () {
         }, 4000);
     }
 
-
     var buttonClicked = localStorage.getItem("time");
     
     console.log("Hora do carregamento da página: " + time);
@@ -73,6 +65,15 @@ $(document).ready(function () {
 
     $("#submitData").click(function (event) {
         event.preventDefault(); // Prevent form submission
+
+        var allValuesFilled = true;
+
+        $("input.editable").each(function() {
+            if ($(this).val().trim() === "") {
+                allValuesFilled = false;
+                return false;
+            }
+        });
 
         if (allValuesFilled) {
 

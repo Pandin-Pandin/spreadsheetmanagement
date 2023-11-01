@@ -8,12 +8,12 @@
     <title>Tabela</title>
 </head>
 <body>
-    <div class="box-fake"></div>
-    <div class="box-title">Planilha</div>
     <form id="dataForm">
+        <div class="ete">Tabela ETE</div>
+        <div class="box-title">Planilha</div>
         <table>
             <tr class="time">
-                <th class="empty"></th>
+                <th class="empty">Coluna 1</th>
                 <?php
                     for ($hora = 0; $hora <24; $hora++) {
                         echo "<th class='head'>" . str_pad($hora, 2, "0", STR_PAD_LEFT) . ":00</th>";

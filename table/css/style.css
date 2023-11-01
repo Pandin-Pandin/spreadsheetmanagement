@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: rgb(255, 255, 255);
+    background-color: #00af9e;
     z-index: 1;
 }
 
@@ -20,47 +20,74 @@ body {
     height: 40px;
     font-size: 35px;
     text-align: center;
-    z-index: 0;
+    z-index: -1;
+}
+
+form {
+    width: fit-content;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.ete {
+    position: sticky;
+    left: 2px;
+    top: 3px;
+    padding: 10px;
+    background-color: rgb(0, 114, 222);
+    color: white;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
 }
 
 table {
-    background-color: white;
+    background-color: #95c0c9;
+    margin-top: 6px;
     z-index: 1;
     position: relative;
     width: fit-content;
     height: fit-content;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 /* Estilo para a primeira coluna (cabeçalhos de linha) */
 
-.line {
-    position: sticky;
-    left: 2px;
-    color: black;
+.time th {
     border: 1px solid black;
-    background-color: white;
-    width: 50px;
+}
+
+.line {
+    height: fit-content;
+    position: sticky;
+    left: 0px;
+    color: black;
+    width: 182px;
 }
 
 .line p {
+    background-color: #a5d0f6;
+    padding: 5px 0 5px 0;
+    border: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.line-name {
     width: 180px;
     min-height: fit-content;
-}
-
-tr>.line {
-    height: fit-content;
-    padding: 5px 0 5px 0;
+    height: 45px;
 }
 
 .head {
-    width: 200px;
     border: 1px solid;
+    background-color: #1e1d30;
+    color: white;
+}
+
+.head:first-child {
+    width: 182px;
 }
 
 td input {
@@ -68,27 +95,21 @@ td input {
     padding-left: 3px;
     font-size: 16px;
     width: 100px;
-    height: 32px;
+    height: 35px;
     user-select: none;
-}
-
-.manage {
-    position: fixed;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    bottom: 0;
-    left: 0;
-    height: fit-content;
-    z-index: 0;
+    border: none;
 }
 
 .buttons {
-    padding: 8px;
+    width: fit-content;
+    margin-top: 10px;
+    position: sticky;
+    left: 2px;
+    display: flex;
+    gap: 10px;
 }
 
-.buttons input {
-    position: relative;
+.send, .clear {
     padding: 10px;
     cursor: pointer;
 }
@@ -140,4 +161,5 @@ td input {
 
 .no-editable {
     pointer-events: none;
+    background-color: #d3dfe2;
 }
