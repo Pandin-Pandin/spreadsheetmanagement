@@ -1,11 +1,10 @@
 <?php
     // Conexão com o banco de dados (substitua com suas próprias credenciais)
-    $servername = "localhost";
-    $dbUsername = "pandin";
-    $dbPassword = "P@nd1n@P";
-    $dbName = "etedb";
-    $dbTable = "etetable";
-
+    $servername = "";
+    $dbUsername = "";
+    $dbPassword = "";
+    $dbName = "";
+    
     // Tentar criar a conexão com o banco de dados
     $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbName);
 
@@ -16,7 +15,31 @@
 
     // Configurar o conjunto de caracteres
     $conn->set_charset("utf8");
-
+    
+    date_default_timezone_set('America/Sao_Paulo');
+    $date = date("d_m_y");
+    
+    $sqlComplement = "SHOW TABLES LIKE '$date'";
+    
+    if ($conn->query($sqlComplement)->num_rows === 0) {
+        $createNewTable = "CREATE TABLE $date (
+            ete VARCHAR(255),
+            hour TIME,
+            phAfluente DECIMAL(5,2),
+            phTanque DECIMAL(5,2),
+            od DECIMAL(5,2),
+            sedimentabilidade VARCHAR(5),
+            phEfluente DECIMAL(5,2),
+            vazao DECIMAL(5,2)
+        )";
+        
+        if ($conn->query($createNewTable) === TRUE) {
+            echo "Tabela $date criada com sucesso.<br>";
+        } else {
+            echo "Erro ao criar a tabela: " . $conn->error;
+        }
+    }
+    
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         $ete = $_POST['ete'];
@@ -44,9 +67,9 @@
         // Validar e limpar os dados (exemplo: mysqli_real_escape_string ou outras funções de validação)
         // Certifique-se de que os dados sejam seguros antes de inseri-los no banco de dados.
 
-        $sql = "INSERT INTO $dbTable ($dataNameConcatenada) VALUES (" . implode(", ", array_fill(0, 8, "?")) . ")";
+        $insertData = "INSERT INTO $date ($dataNameConcatenada) VALUES (" . implode(", ", array_fill(0, 8, "?")) . ")";
 
-        $stmt = $conn->prepare($sql);
+        $stmt = $conn->prepare($insertData);
 
         // Verificar erros na preparação da consulta
         if ($stmt === false) {
@@ -55,20 +78,21 @@
         
             $stmt->bind_param("ssssssss", $ete, $hour, $phAfluente, $phTanque, $od, $sedimentabilidade, $phEfluente, $vazao);
             
-            // Bind and execute the prepared statement
-            $stmt->execute();
-            
             // Verificar erros na execução da consulta
             if ($stmt->error) {
-                echo $stmt->error;
+                echo "Erro na declaração preparada: " . $stmt->error;
             } else {
-                echo "Dados inseridos com sucesso!";
+                if ($stmt->execute()) {
+                    echo "Dados inseridos com sucesso!";
+                } else {
+                    echo "Erro na execução da consulta: " . $stmt->error;
+                }
             }           
             
             // Fechar a declaração preparada
             $stmt->close();
         }
-        // Fechar a conexão com o banco de dados
-        $conn->close();
     }
+    // Fechar a conexão com o banco de dados
+    $conn->close();
 ?>

@@ -5,10 +5,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
 
     // Dados de conexão com o banco de dados
-    $servername = "localhost";
-    $dbUsername = "pandin";
-    $dbPassword = "P@nd1n@P";
-    $dbName = "func";
+    $servername = "";
+    $dbUsername = "";
+    $dbPassword = "";
+    $dbName = "";
 
     try {
         $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbName);

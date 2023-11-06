@@ -4,7 +4,6 @@ $(document).ready(function() {
     $("#name, #passwd").on("input", function() {
         // Esta função é chamada quando o usuário começa a digitar nos campos de nome de usuário ou senha.
         // Vamos esconder o alerta de erro.
-
         $("#error").text(""); // Limpar o texto do alerta de erro
     });
 
@@ -53,12 +52,10 @@ $(document).ready(function() {
                         // Se a resposta for "success", significa que as credenciais foram válidas.
                         window.location.href = "table/index.php";
                         // Redirecionamos o usuário para a página de dashboard.
-
                     } else {
                         // Se a resposta não for "success", então houve um erro de autenticação.
                         errorText.text(response);
                         // Exibimos a mensagem de erro retornada pelo servidor no elemento de erro.
-
                     }
                 },
                 error: function() {

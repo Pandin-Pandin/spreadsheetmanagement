@@ -4,7 +4,9 @@ $(document).ready(function () {
         var url = 'ete_table.php';
         window.open(url, '_blank');
     });
-
+    
+    var previousTime = null;
+    
     function serverTime() {
         currentTime = new Date();
         year = currentTime.getFullYear();
@@ -14,6 +16,14 @@ $(document).ready(function () {
         minute = currentTime.getMinutes();
         second = currentTime.getSeconds();
         time = year + "" + (month < 10 ? "0" : "") + month + "" + (day < 10 ? "0" : "") + day + "" + (hour < 10 ? "0" : "") + hour + "" + (minute < 10 ? "0" : "") + minute;
+        
+        if (previousTime === null) {
+            previousTime = hour;
+        } else if (hour !== previousTime) {
+            // A mudança de hora ocorreu
+            location.reload();
+            previousTime = hour;
+        }
     };
     
     serverTime();
@@ -29,7 +39,7 @@ $(document).ready(function () {
             $("#submitData").removeClass("no-editable");
         };
     };
-
+    
     setInterval(function() {
         hourVerify(time, buttonClicked);
         
@@ -37,7 +47,6 @@ $(document).ready(function () {
 
         var elements = $("td input");
         var currentClass = "column-[" + hour + "]";
-        console.log(currentClass);
         
         elements.each(function() {
            var element = $(this);
@@ -48,32 +57,29 @@ $(document).ready(function () {
             }
         });
     }, 100);
-
+    
     function showError(message) {
         $("#error").html("<p class='error'>" + message + "</p>");
-    
+        
         setTimeout(function() {
             $("#error").html("");
         }, 4000);
     }
-
+    
     var buttonClicked = localStorage.getItem("time");
     
-    console.log("Hora do carregamento da página: " + time);
-    
-    console.log("Momento em que o botão foi clicado: ", buttonClicked); 
-
     $("#submitData").click(function (event) {
-        event.preventDefault(); // Prevent form submission
-
+    
         var allValuesFilled = true;
-
-        $("input.editable").each(function() {
+        
+        $(".editable").each(function() {
             if ($(this).val().trim() === "") {
                 allValuesFilled = false;
                 return false;
             }
         });
+        
+        event.preventDefault(); // Prevent form submission
 
         if (allValuesFilled) {
 

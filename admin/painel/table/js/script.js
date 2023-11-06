@@ -1,32 +1,53 @@
 $(document).ready(function() {
 
-    var $firstSpan = $(".buttons span:first");
-    var $secondSpan = $(".buttons span:nth-child(2)");
-    var $refreshButton = $(".refresh-button");
-
-    function rotateAndToggle() {
+    var $formBtn = $(".form");
+    var $formBox = $('.form-box');
+    var $tableBtn = $(".table");
+    var $tableBox = $('.table-box');
+    var $firstSpanTable = $(".refresh-button-table");
+    var $secondSpanTable = $(".done-table");
+    var $refreshButtonTable = $(".refresh-button-table");
+    var $firstSpanForm = $(".refresh-button-form");
+    var $secondSpanForm = $(".done-form");
+    var $refreshButtonForm = $(".refresh-button-form");
+    
+    $formBtn.click(function() {
+        console.log("teste");
+        console.log("Press");
+        $tableBox.addClass("disable");
+        $formBox.removeClass("disable");
+        $formBox.addClass("enable");
+    });
+    
+    $tableBtn.click(function() {
+        $formBox.addClass("disable");
+        $tableBox.removeClass("disable");
+        $tableBox.addClass("enable");
+    });
+    
+    function rotateAndToggleTable() {
         // Rotate the first span
-        $firstSpan.addClass("rotate");
+        $firstSpanTable.addClass("rotate");
 
         // After a delay, show the second span
         setTimeout(function() {
-            $firstSpan.addClass("disable");
-            $secondSpan.addClass("show");
+            $firstSpanTable.addClass("disable");
+            $secondSpanTable.addClass("show");
 
             // After 2 seconds, hide the second span and re-enable the first span
             setTimeout(function() {
-                $secondSpan.removeClass("show");
-                $firstSpan.removeClass("rotate");
-                $firstSpan.removeClass("disable");
+                $secondSpanTable.removeClass("show");
+                $firstSpanTable.removeClass("rotate");
+                $firstSpanTable.removeClass("disable");
 
                 // Re-enable the first span with a click event
-                $firstSpan.click(rotateAndToggle);
+                $firstSpanTable.click(rotateAndToggleTable);
             }, 2000); // 2 seconds
         }, 700); // 0.7 seconds
     }
 
     // Initially, attach the click event to the first span
-    $firstSpan.click(rotateAndToggle);
+    $firstSpanTable.click(rotateAndToggleTable);
 
     // Função para atualizar a lista de tabelas
     function atualizarTabelas() {
@@ -35,16 +56,14 @@ $(document).ready(function() {
             method: 'GET',
             success: function() {
                 $.ajax({
-                    url: 'update.php',
+                    url: 'tables.php',
                     method: 'GET',
                     success: function(data) {
-                        console.log("Funcionou o update");
                         // Atualize o conteúdo da div .table-box com os dados atualizados
-                        $('#tabelas').html(data);
+                        $('box-data').html(data);
                         // Desvincule o evento de clique antes de adicioná-lo novamente
-                        $refreshButton.off('click');
-                        $refreshButton.click(function() {
-                            console.log("Botão clicado");
+                        $refreshButtonTable.off('click');
+                        $refreshButtonTable.click(function() {
                             // Chame a função para atualizar as tabelas
                             atualizarTabelas();
                         });
@@ -57,14 +76,12 @@ $(document).ready(function() {
             },
             error: function() {
                 console.log("Erro ao unir tabelas");
-                alert('Erro ao unir tabelas.');
             }
         });
     }
 
     // Adicione um manipulador de eventos de clique para o botão de atualização
-    $refreshButton.click(function() {
-        console.log("Botão clicado");
+    $refreshButtonTable.click(function() {
         // Chame a função para atualizar as tabelas
         atualizarTabelas();
     });
@@ -73,5 +90,76 @@ $(document).ready(function() {
         var tableName = $(this).data('table');
         var url = 'view_table.php?table=' + tableName;
         window.open(url, '_blank');
+    });
+    
+    function rotateAndToggleForm() {
+        // Rotate the first span
+        $firstSpanForm.addClass("rotate");
+
+        // After a delay, show the second span
+        setTimeout(function() {
+            $firstSpanForm.addClass("disable");
+            $secondSpanForm.addClass("show");
+
+            // After 2 seconds, hide the second span and re-enable the first span
+            setTimeout(function() {
+                $secondSpanForm.removeClass("show");
+                $firstSpanForm.removeClass("rotate");
+                $firstSpanForm.removeClass("disable");
+
+                // Re-enable the first span with a click event
+                $firstSpanForm.click(rotateAndToggleForm);
+            }, 2000); // 2 seconds
+        }, 700); // 0.7 seconds
+    }
+
+    // Initially, attach the click event to the first span
+    $firstSpanForm.click(rotateAndToggleForm);
+    
+    function atualizarFormularios() {
+        $.ajax({
+            url: 'form.php',
+            method: 'GET',
+            success: function(data) {
+                // Atualize o conteúdo da div .table-box com os dados atualizados
+                $('box-data').html(data);
+                // Desvincule o evento de clique antes de adicioná-lo novamente
+                $refreshButtonForm.off('click');
+                $refreshButtonForm.click(function() {
+                    // Chame a função para atualizar as tabelas
+                    atualizarFormularios();
+                });
+            }
+        });
+    }
+    
+    $refreshButtonTable.click(function() {
+        // Chame a função para atualizar as tabelas
+        atualizarFormularios();
+    });
+    
+    $(".table-name").each(function(index) {
+        var $titleBtn = $(this);
+        var $elementosOcultos = $(".data-form");
+        var $spanArrow = $titleBtn.find("span");
+
+        $titleBtn.click(function() {
+            $elementosOcultos.each(function(elementoIndex) {
+                if (elementoIndex === index) {
+                    if ($spanArrow.hasClass("bottom")) {
+                        $(this).removeClass("disable").addClass("grid");
+                        $spanArrow.removeClass("bottom").addClass("top");
+                    } else {
+                        $(this).removeClass("grid").addClass("disable");
+                        $spanArrow.removeClass("top").addClass("bottom");
+                    }
+                } else {
+                    $(this).removeClass("grid").addClass("disable");
+                    var $otherButton = $(".table-name:eq(" + elementoIndex + ")");
+                    var $otherSpanArrow = $otherButton.find("span");
+                    $otherSpanArrow.removeClass("top").addClass("bottom");
+                }
+            });
+        });
     });
 });
