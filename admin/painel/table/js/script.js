@@ -47,12 +47,9 @@ $(document).ready(function() {
     function rotateAndToggleTable() {
         // Rotate the first span
         $firstSpanTable.addClass("rotate");
-        $firstSpanTable.addClass("rotate");
 
         // After a delay, show the second span
         setTimeout(function() {
-            $firstSpanTable.addClass("disable");
-            $secondSpanTable.addClass("show");
             $firstSpanTable.addClass("disable");
             $secondSpanTable.addClass("show");
 
@@ -61,19 +58,14 @@ $(document).ready(function() {
                 $secondSpanTable.removeClass("show");
                 $firstSpanTable.removeClass("rotate");
                 $firstSpanTable.removeClass("disable");
-                $secondSpanTable.removeClass("show");
-                $firstSpanTable.removeClass("rotate");
-                $firstSpanTable.removeClass("disable");
 
                 // Re-enable the first span with a click event
-                $firstSpanTable.click(rotateAndToggleTable);
                 $firstSpanTable.click(rotateAndToggleTable);
             }, 2000); // 2 seconds
         }, 700); // 0.7 seconds
     }
 
     // Initially, attach the click event to the first span
-    $firstSpanTable.click(rotateAndToggleTable);
     $firstSpanTable.click(rotateAndToggleTable);
 
     // Função para atualizar a lista de tabelas
@@ -84,15 +76,11 @@ $(document).ready(function() {
             success: function() {
                 $.ajax({
                     url: 'tables.php',
-                    url: 'tables.php',
                     method: 'GET',
                     success: function(data) {
                         // Atualize o conteúdo da div .table-box com os dados atualizados
                         $('box-data').html(data);
-                        $('box-data').html(data);
                         // Desvincule o evento de clique antes de adicioná-lo novamente
-                        $refreshButtonTable.off('click');
-                        $refreshButtonTable.click(function() {
                         $refreshButtonTable.off('click');
                         $refreshButtonTable.click(function() {
                             // Chame a função para atualizar as tabelas
@@ -112,7 +100,6 @@ $(document).ready(function() {
     }
 
     // Adicione um manipulador de eventos de clique para o botão de atualização
-    $refreshButtonTable.click(function() {
     $refreshButtonTable.click(function() {
         // Chame a função para atualizar as tabelas
         atualizarTabelas();
