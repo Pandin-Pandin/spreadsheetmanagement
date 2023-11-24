@@ -43,6 +43,14 @@ form {
     user-select: none;
 }
 
+.ete:hover {
+    filter: brightness(1.3);
+}
+
+.ete:active {
+    scale: 1.1;
+}
+
 table {
     background-color: #95c0c9;
     margin-top: 6px;
@@ -112,6 +120,25 @@ td input {
 .send, .clear {
     padding: 10px;
     cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    color: white;
+}
+
+.send {
+    background-color: #00c4d8;
+}
+
+.clear {
+    background-color: #949494;
+}
+
+.send:hover, .clear:hover {
+    filter: brightness(1.4);
+}
+
+.send:active, .clear:active {
+    scale: 1.1;
 }
 
 .error-box {

@@ -56,7 +56,6 @@ $(document).ready(function() {
                         // Se a resposta não for "success", então houve um erro de autenticação.
                         errorText.text(response);
                         // Exibimos a mensagem de erro retornada pelo servidor no elemento de erro.
-
                     }
                 },
                 error: function() {
