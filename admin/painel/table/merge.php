@@ -1,10 +1,10 @@
 <?php
 
-$host = 'localhost';
-$user = 'pandin';
-$password = 'P@nd1n@P';
-$database = 'tabledb';
-$destiny_database = 'finaltable';
+$host = '';
+$user = '';
+$password = '';
+$database = '';
+$destiny_database = '';
 
 try {
     $conn = new mysqli($host, $user, $password, $database);

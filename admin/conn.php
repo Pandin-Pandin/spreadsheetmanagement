@@ -3,10 +3,10 @@
     $password = $_POST["password"];
 
     // Conexão com o banco de dados (substitua com suas próprias credenciais)
-    $servername = "localhost";
-    $dbUsername = "pandin";
-    $dbPassword = "P@nd1n@P";
-    $dbName = "form";
+    $servername = "";
+    $dbUsername = "";
+    $dbPassword = "";
+    $dbName = "";
 
     try {
         // Tentar criar a conexão com o banco de dados

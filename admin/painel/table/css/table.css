@@ -18,6 +18,7 @@
 }
 
 .container {
+.container {
     display: flex;
     flex-direction: column;
     padding: 15px 20px 15px 20px;
@@ -26,9 +27,11 @@
     background-color: var(--blue-bg-two);
     color: white;
     min-width: 230px;
+    min-width: 230px;
 }
 
 .table-container {
+    max-height: 50vh;
     max-height: 50vh;
     display: flex;
     flex-direction: column;
@@ -36,6 +39,11 @@
     background-color: var(--blue-bg-two);
     padding-left: 10px;
     padding-right: 10px;
+    scrollbar-color: rgb(22, 107, 227) rgb(36, 56, 116);
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background-color: rgb(36, 56, 116);
     scrollbar-color: rgb(22, 107, 227) rgb(36, 56, 116);
 }
 
@@ -61,18 +69,26 @@ span.refresh-button-table:hover {
 }
 
 span.rotate {
+span.refresh-button-table:hover {
+    color: rgb(49, 228, 255);
+}
+
+span.rotate {
     transform: rotate(360deg);
     transition: transform 600ms;
 }
 
 span.disable {
+span.disable {
     display: none;
 }
 
 span.done-table {
+span.done-table {
     display: none;
 }
 
+span.done-table.show {
 span.done-table.show {
     color: rgb(27, 255, 27);
     display: inline-block;
@@ -80,6 +96,26 @@ span.done-table.show {
     transition: opacity 2s;
 }
 
+.title-box {
+    position: relative;
+}
+
+.form {
+    position: absolute;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #00af9e;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.form:hover {
+    filter: brightness(1.3);
+}
+
+.form:active {
+    scale: 1.2;
 .title-box {
     position: relative;
 }
@@ -112,6 +148,7 @@ span.done-table.show {
     display: flex;
     gap: 10px;
     align-items: center;
+    justify-content: center;
     justify-content: center;
 }
 

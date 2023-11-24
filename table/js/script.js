@@ -7,6 +7,13 @@ $(document).ready(function () {
     
     var previousTime = null;
     
+    $('.ete').click(function() {
+        var url = 'ete_table.php';
+        window.open(url, '_blank');
+    });
+    
+    var previousTime = null;
+    
     function serverTime() {
         currentTime = new Date();
         year = currentTime.getFullYear();
@@ -16,6 +23,15 @@ $(document).ready(function () {
         minute = currentTime.getMinutes();
         second = currentTime.getSeconds();
         time = year + "" + (month < 10 ? "0" : "") + month + "" + (day < 10 ? "0" : "") + day + "" + (hour < 10 ? "0" : "") + hour + "" + (minute < 10 ? "0" : "") + minute;
+        
+        if (previousTime === null) {
+            previousTime = hour;
+        } else if (hour !== previousTime) {
+            // A mudança de hora ocorreu
+            location.reload();
+            previousTime = hour;
+        }
+    };
         
         if (previousTime === null) {
             previousTime = hour;
@@ -43,7 +59,22 @@ $(document).ready(function () {
     setInterval(function() {
         hourVerify(time, buttonClicked);
         
+        
         serverTime();
+
+        var elements = $("td input");
+        var currentClass = "column-[" + hour + "]";
+        
+        elements.each(function() {
+           var element = $(this);
+           if (element.hasClass(currentClass)) {
+                element.removeClass("no-editable").addClass("editable");
+            } else {
+                element.addClass("no-editable");
+            }
+        });
+    }, 100);
+    
 
         var elements = $("td input");
         var currentClass = "column-[" + hour + "]";
@@ -61,14 +92,27 @@ $(document).ready(function () {
     function showError(message) {
         $("#error").html("<p class='error'>" + message + "</p>");
         
+        
         setTimeout(function() {
             $("#error").html("");
         }, 4000);
     }
     
+    
     var buttonClicked = localStorage.getItem("time");
     
+    
     $("#submitData").click(function (event) {
+    
+        var allValuesFilled = true;
+        
+        $(".editable").each(function() {
+            if ($(this).val().trim() === "") {
+                allValuesFilled = false;
+                return false;
+            }
+        });
+        
     
         var allValuesFilled = true;
         

@@ -1,10 +1,10 @@
 <?php
 
-    // Database connection parameters
-    $servername = "localhost";
-    $username = "pandin";
-    $password = "P@nd1n@P";
-    $dbname = "tabledb";
+// Database connection parameters
+$servername = "";
+$username = "";
+$password = "";
+$dbname = "";
 
     try {
         // Attempt to create a connection to the database

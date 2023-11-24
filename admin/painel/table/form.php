@@ -1,9 +1,9 @@
 <?php
     // Conexão com o banco de dados (substitua com suas próprias credenciais)
-    $servername = "localhost";
-    $dbUsername = "pandin";
-    $dbPassword = "P@nd1n@P";
-    $dbName = "etedb";
+    $servername = "";
+    $dbUsername = "";
+    $dbPassword = "";
+    $dbName = "";
 
     try {
         // Tentar criar a conexão com o banco de dados
